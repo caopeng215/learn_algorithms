@@ -6,19 +6,19 @@ func main() {
   nums := []int{1,2,3,4,5,6,7}
   k := 10
   arr := twoSum(nums, k)
-  fmt.Printf("exist: %v", arr)
+  fmt.Printf("arr is %d:", arr)
 }
 
-func twoSum(nums []int, target int) []int {
-  numMap := make(map[int]int, len(nums))
-  for i:=0; i < len(nums); i++ {
-      numMap[nums[i]] = i
-  }
-  for i:=0; i<len(nums); i++ {
-      if index, ok := numMap[target - nums[i]]; ok && i != index {
-         return []int {i, index} 
-      }
-  }
-  numMap = nil
-  return []int{}
+// 优化代码 
+// 只需要for遍历一次
+func twoSum(list []int, target int) []int {
+    mm := make(map[int]int, len(list))
+	for i, v := range list {
+      if j, ok := mm[target-v]; ok {
+        return []int{j, i}  
+	  } else {
+		mm[v] = i
+	  }
+    }
+	return []int{}
 }
